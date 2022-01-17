@@ -7,22 +7,55 @@
 
 import SwiftUI
 
+func withOptionalAnimation<Result>(_ animation: Animation? = .default, body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+        return try body()
+    } else {
+        return try withAnimation(animation, body)
+    }
+}
+
 struct ContentView: View {
-    @Environment(\.scenePhase) var scenePhase
+//    @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+    
+//    @Environment(\.accessibilityReduceMotion) var reduceMotion
+//    @State private var scale = 1.0
+    
+    @Environment(\.accessibilityReduceTransparency) var reduceTransparency
     
     var body: some View {
-        Text("Hello, world!")
+//        HStack {
+//            if differentiateWithoutColor {
+//                Image(systemName: "checkmark.circle")
+//            }
+//
+//            Text("Success")
+//        }
+//        .padding()
+//        .background(differentiateWithoutColor ? .black : .green)
+//        .foregroundColor(.white)
+//        .clipShape(Capsule())
+        
+//        Text("Hello, World!")
+//            .scaleEffect(scale)
+//            .onTapGesture {
+////                if reduceMotion {
+////                    scale *= 1.5
+////                } else {
+//                    withAnimation {
+////                        scale *= 1.5
+////                    }
+////                }
+//                withOptionalAnimation {
+//                    scale *= 1.5
+//                }
+//            }
+        
+        Text("Hello, World!")
             .padding()
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
-                    print("Active")
-                } else if newPhase == .inactive {
-                    print("Inactive")
-                } else if newPhase == .background {
-                    print("Background")
-                }
-            }
-
+            .background(reduceTransparency ? .black: .black.opacity(0.5))
+            .foregroundColor(.white)
+            .clipShape(Capsule())
     }
 }
 
