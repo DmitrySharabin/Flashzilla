@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E028F7F2795D8E6000F6941 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E028F7E2795D8E6000F6941 /* Card.swift */; };
 		8E028F812795DA06000F6941 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E028F802795DA06000F6941 /* CardView.swift */; };
+		8E7EB689279847F5004C205E /* EditCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7EB688279847F5004C205E /* EditCards.swift */; };
 		8EAE7CBD2794263B008633E5 /* FlashzillaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAE7CBC2794263B008633E5 /* FlashzillaApp.swift */; };
 		8EAE7CBF2794263B008633E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAE7CBE2794263B008633E5 /* ContentView.swift */; };
 		8EAE7CC12794263D008633E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAE7CC02794263D008633E5 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		8E028F7E2795D8E6000F6941 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8E028F802795DA06000F6941 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		8E7EB688279847F5004C205E /* EditCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCards.swift; sourceTree = "<group>"; };
 		8EAE7CB92794263B008633E5 /* Flashzilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashzilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAE7CBC2794263B008633E5 /* FlashzillaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashzillaApp.swift; sourceTree = "<group>"; };
 		8EAE7CBE2794263B008633E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				8EAE7CBE2794263B008633E5 /* ContentView.swift */,
 				8E028F802795DA06000F6941 /* CardView.swift */,
 				8E028F7E2795D8E6000F6941 /* Card.swift */,
+				8E7EB688279847F5004C205E /* EditCards.swift */,
 				8EAE7CC02794263D008633E5 /* Assets.xcassets */,
 				8EAE7CC22794263D008633E5 /* Preview Content */,
 			);
@@ -146,6 +149,7 @@
 				8EAE7CBF2794263B008633E5 /* ContentView.swift in Sources */,
 				8E028F7F2795D8E6000F6941 /* Card.swift in Sources */,
 				8E028F812795DA06000F6941 /* CardView.swift in Sources */,
+				8E7EB689279847F5004C205E /* EditCards.swift in Sources */,
 				8EAE7CBD2794263B008633E5 /* FlashzillaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
