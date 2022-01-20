@@ -44,10 +44,16 @@ struct ContentView: View {
                     .clipShape(Capsule())
                 
                 ZStack {
-                    ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: cards[index]) {
+                    ForEach(cards) { card in
+                        let index = cards.firstIndex(of: card) ?? 0
+                        
+                        CardView(card: card) { isWrong in
                             withAnimation {
-                                removeCard(at: index)
+                                if isWrong {
+                                    moveCard(at: index)
+                                } else {
+                                    removeCard(at: index)
+                                }
                             }
                         }
                         .stacked(at: index, in: cards.count)
@@ -93,7 +99,7 @@ struct ContentView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                removeCard(at: cards.count - 1)
+                                moveCard(at: cards.count - 1)
                             }
                         } label: {
                             Image(systemName: "xmark.circle")
@@ -161,6 +167,16 @@ struct ContentView: View {
         if cards.isEmpty {
             isActive = false
         }
+    }
+    
+    func moveCard(at index: Int) {
+        guard index >= 0 else { return }
+        
+        var card = cards[index]
+        card.id = UUID()
+        
+        cards.remove(at: index)
+        cards.insert(card, at: 0)
     }
     
     func resetCards() {
