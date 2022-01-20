@@ -8,7 +8,8 @@
 import SwiftUI
 
 
-struct Card: Codable {
+struct Card: Codable, Identifiable {
+    var id = UUID()
     let prompt: String
     let answer: String
     
