@@ -60,10 +60,10 @@
 			isa = PBXGroup;
 			children = (
 				8EAE7CBC2794263B008633E5 /* FlashzillaApp.swift */,
-				8EAE7CBE2794263B008633E5 /* ContentView.swift */,
+				8E028F7E2795D8E6000F6941 /* Card.swift */,
 				8EB4A2FB279994FA009AA465 /* CardsViewModel.swift */,
 				8E028F802795DA06000F6941 /* CardView.swift */,
-				8E028F7E2795D8E6000F6941 /* Card.swift */,
+				8EAE7CBE2794263B008633E5 /* ContentView.swift */,
 				8E7EB688279847F5004C205E /* EditCards.swift */,
 				8EAE7CC02794263D008633E5 /* Assets.xcassets */,
 				8EAE7CC22794263D008633E5 /* Preview Content */,

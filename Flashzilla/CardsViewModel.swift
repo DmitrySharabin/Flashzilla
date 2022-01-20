@@ -13,21 +13,27 @@ class CardsViewModel: ObservableObject {
     @Published private(set) var timeRemaining = 100
     @Published private(set) var isActive = true
     
+    private let savePath: URL
+    
     init() {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        savePath = paths[0].appendingPathComponent("Cards")
+        
         resetCards()
     }
     
     func loadData() {
-        if let data = UserDefaults.standard.data(forKey: "Cards") {
-            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded
-            }
+        do {
+            let data = try Data(contentsOf: savePath)
+            cards = try JSONDecoder().decode([Card].self, from: data)
+        } catch {
+            cards = []
         }
     }
     
     func saveData() {
         if let data = try? JSONEncoder().encode(cards) {
-            UserDefaults.standard.set(data, forKey: "Cards")
+            try? data.write(to: savePath, options: [.atomic, .completeFileProtection])
         }
     }
     
