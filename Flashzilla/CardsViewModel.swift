@@ -82,6 +82,8 @@ class CardsViewModel: ObservableObject {
     }
     
     func changeTime() {
+        guard cards.isEmpty == false else { return }
+        
         if timeRemaining > 0 {
             timeRemaining -= 1
         }

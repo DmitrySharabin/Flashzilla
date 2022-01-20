@@ -137,6 +137,11 @@ struct ContentView: View {
         .sheet(isPresented: $showingEditScreen, onDismiss: vm.resetCards) {
             EditCards(vm: vm)
         }
+        .onAppear {
+            if vm.cards.isEmpty {
+                showingEditScreen = true
+            }
+        }
     }
 }
 
