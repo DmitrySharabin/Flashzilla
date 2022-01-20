@@ -67,13 +67,6 @@ struct CardView: View {
                 }
                 .onEnded { _ in
                     if abs(offset.width) > 100 {
-//                        if offset.width > 0 {
-//                            feedback.notificationOccurred(.success)
-//                        } else {
-//                            feedback.notificationOccurred(.error)
-//                        }
-                        
-                        // Slightly better approach
                         if offset.width < 0 {
                             feedback.notificationOccurred(.error)
                         }
