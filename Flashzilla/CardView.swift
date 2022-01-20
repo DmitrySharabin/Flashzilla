@@ -97,7 +97,7 @@ struct CardView: View {
             return .red
         }
         
-        return .clear
+        return .white
     }
 }
 
