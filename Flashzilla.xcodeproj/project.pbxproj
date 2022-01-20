@@ -14,6 +14,7 @@
 		8EAE7CBF2794263B008633E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAE7CBE2794263B008633E5 /* ContentView.swift */; };
 		8EAE7CC12794263D008633E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAE7CC02794263D008633E5 /* Assets.xcassets */; };
 		8EAE7CC42794263D008633E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAE7CC32794263D008633E5 /* Preview Assets.xcassets */; };
+		8EB4A2FC279994FA009AA465 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4A2FB279994FA009AA465 /* CardsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		8EAE7CBE2794263B008633E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8EAE7CC02794263D008633E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EAE7CC32794263D008633E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8EB4A2FB279994FA009AA465 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				8EAE7CBC2794263B008633E5 /* FlashzillaApp.swift */,
 				8EAE7CBE2794263B008633E5 /* ContentView.swift */,
+				8EB4A2FB279994FA009AA465 /* CardsViewModel.swift */,
 				8E028F802795DA06000F6941 /* CardView.swift */,
 				8E028F7E2795D8E6000F6941 /* Card.swift */,
 				8E7EB688279847F5004C205E /* EditCards.swift */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAE7CBF2794263B008633E5 /* ContentView.swift in Sources */,
+				8EB4A2FC279994FA009AA465 /* CardsViewModel.swift in Sources */,
 				8E028F7F2795D8E6000F6941 /* Card.swift in Sources */,
 				8E028F812795DA06000F6941 /* CardView.swift in Sources */,
 				8E7EB689279847F5004C205E /* EditCards.swift in Sources */,

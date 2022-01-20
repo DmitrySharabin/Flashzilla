@@ -9,7 +9,9 @@ import SwiftUI
 
 struct EditCards: View {
     @Environment(\.dismiss) var dismiss
-    @State private var cards = [Card]()
+    
+    @ObservedObject var vm: CardsViewModel
+
     @State private var newPrompt = ""
     @State private var newAnswer = ""
     
@@ -24,12 +26,12 @@ struct EditCards: View {
                 }
                 
                 Section {
-                    ForEach(cards.indices, id: \.self) { index in
+                    ForEach(vm.cards) { card in
                         VStack(alignment: .leading) {
-                            Text(cards[index].prompt)
+                            Text(card.prompt)
                                 .font(.headline)
                             
-                            Text(cards[index].answer)
+                            Text(card.answer)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -41,26 +43,12 @@ struct EditCards: View {
                 Button("Done", action: done)
             }
             .listStyle(.grouped)
-            .onAppear(perform: loadData)
+            .onAppear(perform: vm.loadData)
         }
     }
     
     func done() {
         dismiss()
-    }
-    
-    func loadData() {
-        if let data = UserDefaults.standard.data(forKey: "Cards") {
-            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded
-            }
-        }
-    }
-    
-    func saveData() {
-        if let data = try? JSONEncoder().encode(cards) {
-            UserDefaults.standard.set(data, forKey: "Cards")
-        }
     }
     
     func addCard() {
@@ -69,22 +57,22 @@ struct EditCards: View {
         guard trimmedPrompt.isEmpty == false && trimmedAnswer.isEmpty == false else { return }
         
         let card = Card(prompt: trimmedPrompt, answer: trimmedAnswer)
-        cards.insert(card, at: 0)
+        vm.insertCard(card)
         
         newPrompt = ""
         newAnswer = ""
         
-        saveData()
+        vm.saveData()
     }
     
     func removeCards(at offsets: IndexSet) {
-        cards.remove(atOffsets: offsets)
-        saveData()
+        vm.removeCards(at: offsets)
+        vm.saveData()
     }
 }
 
 struct EditCards_Previews: PreviewProvider {
     static var previews: some View {
-        EditCards()
+        EditCards(vm: CardsViewModel())
     }
 }

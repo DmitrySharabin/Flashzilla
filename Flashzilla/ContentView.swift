@@ -18,15 +18,12 @@ extension View {
 struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
-    @State private var cards = [Card]()
-    
-    @State private var timeRemaining = 100
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     @Environment(\.scenePhase) var scenePhase
-    @State private var isActive = true
     
+    @StateObject var vm = CardsViewModel()
     @State private var showingEditScreen = false
+
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -35,7 +32,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Text("Time: \(timeRemaining)")
+                Text("Time: \(vm.timeRemaining)")
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding(.horizontal, 20)
@@ -44,27 +41,27 @@ struct ContentView: View {
                     .clipShape(Capsule())
                 
                 ZStack {
-                    ForEach(cards) { card in
-                        let index = cards.firstIndex(of: card) ?? 0
+                    ForEach(vm.cards) { card in
+                        let index = vm.cards.firstIndex(of: card) ?? 0
                         
                         CardView(card: card) { isWrong in
                             withAnimation {
                                 if isWrong {
-                                    moveCard(at: index)
+                                    vm.moveCard(at: index)
                                 } else {
-                                    removeCard(at: index)
+                                    vm.removeCard(at: index)
                                 }
                             }
                         }
-                        .stacked(at: index, in: cards.count)
-                        .allowsHitTesting(index == cards.count - 1)
-                        .accessibilityHidden(index < cards.count - 1)
+                        .stacked(at: index, in: vm.cards.count)
+                        .allowsHitTesting(index == vm.cards.count - 1)
+                        .accessibilityHidden(index < vm.cards.count - 1)
                     }
                 }
-                .allowsHitTesting(timeRemaining > 0)
+                .allowsHitTesting(vm.timeRemaining > 0)
                 
-                if cards.isEmpty {
-                    Button("Start Again", action: resetCards)
+                if vm.cards.isEmpty {
+                    Button("Start Again", action: vm.resetCards)
                         .padding()
                         .background(.white)
                         .foregroundColor(.black)
@@ -99,7 +96,7 @@ struct ContentView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                moveCard(at: cards.count - 1)
+                                vm.moveCard(at: vm.cards.count - 1)
                             }
                         } label: {
                             Image(systemName: "xmark.circle")
@@ -114,7 +111,7 @@ struct ContentView: View {
                         
                         Button {
                             withAnimation {
-                                removeCard(at: cards.count - 1)
+                                vm.removeCard(at: vm.cards.count - 1)
                             }
                         } label: {
                             Image(systemName: "checkmark.circle")
@@ -132,57 +129,14 @@ struct ContentView: View {
             }
         }
         .onReceive(timer) { time in
-            guard isActive else { return }
+            guard vm.isActive else { return }
             
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            }
+            vm.changeTime()
         }
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                if cards.isEmpty == false {
-                    isActive = true                    
-                }
-            } else {
-                isActive = false
-            }
+        .onChange(of: scenePhase, perform: vm.changeState)
+        .sheet(isPresented: $showingEditScreen, onDismiss: vm.resetCards) {
+            EditCards(vm: vm)
         }
-        .sheet(isPresented: $showingEditScreen, onDismiss: resetCards, content: EditCards.init)
-        .onAppear(perform: resetCards)
-    }
-    
-    func loadData() {
-        if let data = UserDefaults.standard.data(forKey: "Cards") {
-            if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
-                cards = decoded
-            }
-        }
-    }
-    
-    func removeCard(at index: Int) {
-        guard index >= 0 else { return }
-        
-        cards.remove(at: index)
-        
-        if cards.isEmpty {
-            isActive = false
-        }
-    }
-    
-    func moveCard(at index: Int) {
-        guard index >= 0 else { return }
-        
-        var card = cards[index]
-        card.id = UUID()
-        
-        cards.remove(at: index)
-        cards.insert(card, at: 0)
-    }
-    
-    func resetCards() {
-        loadData()
-        timeRemaining = 100
-        isActive = true
     }
 }
 
